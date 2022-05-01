@@ -2,7 +2,8 @@
 import pandas as pd
 from typing import Optional
 
-def age_category(age)-> Optional(str):
+
+def age_category(age) -> Optional[str]:
     """
     return a classified age to an age bracket
     :param age:
@@ -25,7 +26,7 @@ def format_time(x) -> str:
     :param x:
     :return: formatted string
     """
-    if x is pd.NaT:
+    if not x:
         return None
     if x.hour == 0:
         return x.strftime("%M.%S,%f")[:-5]

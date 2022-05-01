@@ -19,25 +19,27 @@ logger.setLevel(logging.INFO)
 logger.addHandler(fh)
 logger.addHandler(sh)
 
+
 def list_alphabet():
     for i in range(ord('a'), ord('z') + 1):
         yield chr(i)
 
-def click_year_param_validate(s,e):
+
+def click_year_param_validate(s, e):
     if s >= e:
         raise click.BadParameter(f"Start year {s} and end_year {e}: in empty set")
     return
 
 
 @click.command()
-@click.option('--start-year', '-s', default=2014,  type=int, help='Start year to use')
-@click.option('--end-year', '-e', default=2019,  type=int, help='Search up to this year (excluded)')
+@click.option('--start-year', '-s', default=2014, type=int, help='Start year to use')
+@click.option('--end-year', '-e', default=2019, type=int, help='Search up to this year (excluded)')
 async def scrape(start_year, end_year):
     runners = []
     pages_not_parsed = []
     runners_not_parsed = 0
 
-    click_year_param_validate(start_year, end_year )
+    click_year_param_validate(start_year, end_year)
 
     regex = re.compile('([\d\?]{4}) ([\D\s]+) ([\d:,.-]+)', re.U)
 
@@ -73,7 +75,7 @@ async def scrape(start_year, end_year):
                         )
                         runners.append(runner)
                     except Exception as e:
-                        logging.warning('e')
+                        logging.warning(e)
                         logging.warning(f"Couldn't parse runner at line {info}")
                         runners_not_parsed += 1
 

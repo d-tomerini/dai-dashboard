@@ -1,9 +1,8 @@
-from dash import Dash, html, dcc, dash_table, Input, Output, State, callback_context
+from dash import Dash, html, dcc, dash_table, Input, Output, State
 import plotly.express as px
 import pandas as pd
 from services.database import Session
 from dash_app.utils import age_category, format_time
-
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
@@ -26,6 +25,7 @@ A download button is provided at the bottom of the page to obtain a *csv* file w
 selected by the dropdowns.
 """
 
+
 def query_runners():
     with Session() as session:
         # query = 'SELECT "Id", "Age_year", "total_time", "run_year" FROM runners'
@@ -39,7 +39,6 @@ df = df.astype({'Age_year': 'Int64'})
 df['age'] = df.run_year - df.Age_year
 df['age_decade'] = df['age'].apply(age_category)
 df['total_time'] = df_sql.total_time.apply(format_time)
-
 
 year_indicator = sorted(df.run_year.unique())
 age_decade_indicator = sorted(df.age_decade.unique())
