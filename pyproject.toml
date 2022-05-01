@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "DAI_scrape_visualize"
+authors = [
+    {name = "Daniele Tomerini", email = "daniele.tomerini@gmail.com"}
+]
+version = "0.0.1"
+description = "Runner scraper from zurich marathon, and visualization"
+readme = "README.md"
+dependencies = [
+    "AsyncClick",
+    "pandas",
+    "beautifulsoup4",
+    "pydantic",
+    "typing",
+    "httpx",
+    "dynaconf",
+    "SQLAlchemy",
+    "dash",
+    "psycopg2"
+]
+
+[tool.setuptools]
+include-package-data = true
+packages = ["scrape_and_visualize"]
+
+[project.scripts]
+scraper = "scrape_and_visualize.scraper:scrape"
